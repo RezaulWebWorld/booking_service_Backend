@@ -8,6 +8,7 @@ import { User } from "../user/user.model";
 import { any } from "zod";
 import { TUser } from "../user/user.interface";
 
+// Booking Service for creating Booking
 const createBooking = async (payload: TBooking) => {
   const slotLength = payload.slots.length;
   const room = await Room.findById(payload.room);
@@ -31,11 +32,13 @@ const createBooking = async (payload: TBooking) => {
   const bookingData = await bookingModel.create(newPayload);
   return bookingData;
 };
+
+// Booking Service for getting all Booking
 const getBookingService = async () => {
   const allBookings = await bookingModel.find();
   return allBookings;
 };
-
+// Booking Service for upadate  Booking service by id
 const updateBookingService = async (
   id: string,
   payloads: Partial<TBooking>
@@ -60,6 +63,7 @@ const updateBookingService = async (
     throw new Error("Failed to Update");
   }
 };
+// Booking Service for softDelete  Booking service by id
 const softDeleteBooking = async (_id: string) => {
   const session = await mongoose.startSession();
   try {
@@ -88,6 +92,7 @@ const softDeleteBooking = async (_id: string) => {
   }
 };
 
+// Booking Service for get All User  Booking service
 const getUserBooking = async (payload: Partial<TUser>) => {
   const newUser = payload.email;
   const userTwo = await User.findOne({ email: newUser });
@@ -100,8 +105,6 @@ const getUserBooking = async (payload: Partial<TUser>) => {
     .exec();
 
   const allNewBookings: Partial<TBooking> = {};
-  // const userId = userIdArr[0].toString();
-  // const resultId = userId.split("new")[0];
 
   try {
     const targetUser = getUserBooked.filter((e: any) => {
