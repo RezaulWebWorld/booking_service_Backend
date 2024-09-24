@@ -6,6 +6,8 @@ import { USER_ROLE } from "../user/user.constans";
 const bookingRouter = express.Router();
 const userBookingRouter = express.Router();
 
+// Routers for Booking
+
 bookingRouter.post(
   "/",
   auth(USER_ROLE.user),
