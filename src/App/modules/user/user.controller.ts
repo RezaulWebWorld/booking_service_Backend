@@ -1,5 +1,11 @@
 import httpStatus from "http-status";
-import { NextFunction, Request, RequestHandler, Response } from "express";
+import {
+  NextFunction,
+  Request,
+  RequestHandler,
+  response,
+  Response,
+} from "express";
 import { UserServices } from "./user.service";
 import sendResponse from "../../utils/sendResponse";
 import catchAsync from "../../utils/catchAsync";
@@ -18,19 +24,20 @@ const userRegistration = catchAsync(async (req, res, next) => {
 });
 
 const userLogin = catchAsync(async (req, res, next) => {
-  const { accessToken, refreshToken } = await UserServices.userLogin(req.body);
+  const { userData, token, refreshToken } = await UserServices.userLogin(
+    req.body
+  );
   res.cookie("refreshToken", refreshToken, {
     httpOnly: true,
     secure: config.node_development === "production",
   });
 
-  sendResponse(res, {
-    statusCode: httpStatus.OK,
+  res.status(httpStatus.OK).json({
     success: true,
-    message: "User Log in Successful",
-    data: {
-      accessToken,
-    },
+    statusCode: httpStatus.OK,
+    message: "User logged in successfully",
+    token: token,
+    data: userData,
   });
 });
 

@@ -35,15 +35,28 @@ const getallRoomService = async () => {
 };
 
 const updateRoomService = async (_id: string, payload: TRoom) => {
-  const roomId = await Room.findOne({ _id });
+  const session = await mongoose.startSession();
+  try {
+    session.startTransaction();
+    const roomId = await Room.findOne({ _id });
+    if (!roomId) {
+      throw new Error(" No Room Found to Update");
+    }
 
-  if (!roomId) {
-    throw new Error(" No Room Found to Update");
+    const result = await Room.findByIdAndUpdate({ _id }, payload, {
+      new: true,
+      session,
+    });
+
+    await session.commitTransaction();
+    await session.endSession();
+
+    return result;
+  } catch (error) {
+    await session.abortTransaction();
+    await session.endSession();
+    throw new Error("Failed to Update");
   }
-
-  const result = await Room.findByIdAndUpdate({ _id }, payload);
-
-  return result;
 };
 
 const softDeleteRoomService = async (_id: string) => {

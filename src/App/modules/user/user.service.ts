@@ -16,6 +16,7 @@ const createUserDb = async (payload: TUser) => {
 };
 
 const userLogin = async (payload: TLogin) => {
+  const userData = await User.findOne({ email: payload.email });
   const user = await User.findOne({ email: payload.email }).select("+password");
   if (!user) {
     throw new Error("Oops! Email is not in our Database, please register!!!");
@@ -25,10 +26,13 @@ const userLogin = async (payload: TLogin) => {
     throw new Error("Oops! Password is not Correct!!!");
   }
   const jwtPayload = {
+    name: user.name,
     email: user.email,
     role: user.role,
+    phone: user.phone,
+    address: user.address,
   };
-  const accessToken = jwt.sign(jwtPayload, config.json_web_token as string, {
+  const token = jwt.sign(jwtPayload, config.json_web_token as string, {
     expiresIn: config.token_expire,
   });
   const refreshToken = jwt.sign(
@@ -36,7 +40,7 @@ const userLogin = async (payload: TLogin) => {
     config.refresh_web_token as string,
     { expiresIn: config.expire_refresh_token }
   );
-  return { accessToken, refreshToken };
+  return { userData, token, refreshToken };
 };
 const getAuthUserBookingService = async (user: Partial<TBooking>) => {
   const allUserBookings = await bookingModel.find(user);

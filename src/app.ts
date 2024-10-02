@@ -10,9 +10,6 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 app.use("/api", routes);
-app.use("/", (req: Request, res: Response) => {
-  res.send("Welcome To the Backend Server");
-});
 
 app.use(globalErrorHandeler);
 

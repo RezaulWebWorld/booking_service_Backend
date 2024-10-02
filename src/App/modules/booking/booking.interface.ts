@@ -1,8 +1,8 @@
 import { Date, ObjectId } from "mongoose";
 
 export type TBooking = {
-  room: ObjectId;
   slots: ObjectId[];
+  room: ObjectId;
   user: ObjectId;
   date: Date;
   totalAmount: number;

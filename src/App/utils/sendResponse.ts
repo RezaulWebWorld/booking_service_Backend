@@ -7,11 +7,12 @@ type TResponse<T> = {
   data: T;
 };
 
-const sendResponse = <T>(res: Response, data: TResponse<T>) => {
+const sendResponse = <T>(res: Response, data: any) => {
   res.status(data?.statusCode).json({
     success: data.success,
+    statusCode: data?.statusCode,
     message: data.message,
-    data: data,
+    data: data?.data,
   });
 };
 

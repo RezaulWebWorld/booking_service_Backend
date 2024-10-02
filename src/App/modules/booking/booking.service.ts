@@ -35,7 +35,12 @@ const createBooking = async (payload: TBooking) => {
 
 // Booking Service for getting all Booking
 const getBookingService = async () => {
-  const allBookings = await bookingModel.find();
+  const allBookings = await bookingModel
+    .find()
+    .populate("slots")
+    .populate("room")
+    .populate("user")
+    .exec();
   return allBookings;
 };
 // Booking Service for upadate  Booking service by id

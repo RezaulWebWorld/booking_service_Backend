@@ -21,7 +21,7 @@ const getSlot = catchAsync(async (req, res, next) => {
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: "Slots retrieved successfully",
+    message: "Available slots retrieved successfully",
     data: result,
   });
 });
