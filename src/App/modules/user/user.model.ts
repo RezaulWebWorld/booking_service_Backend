@@ -40,7 +40,6 @@ export const userSchema = new Schema<TUser>(
 // *******Middleware***
 userSchema.pre("save", async function (next) {
   const user = this;
-  console.log(user, "user");
   user.password = await bcryptjs.hash(
     user.password,
     Number(config.bycrypt_salts)

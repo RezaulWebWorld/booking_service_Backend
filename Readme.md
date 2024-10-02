@@ -39,12 +39,7 @@ Copy code
 npm install
 Set up environment variables: Create a .env file in the root of the project and add the following:
 
-makefile
-Copy code
-DATABASE_URL=<your-mongodb-url>
-PORT=5000
-JWT_SECRET=<your-jwt-secret>
-Compile TypeScript:
+Admin- UserName
 
 bash
 Copy code

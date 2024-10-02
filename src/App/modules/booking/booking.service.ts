@@ -96,7 +96,6 @@ const softDeleteBooking = async (_id: string) => {
 const getUserBooking = async (payload: Partial<TUser>) => {
   const newUser = payload.email;
   const userTwo = await User.findOne({ email: newUser });
-  console.log("UserTwo", userTwo?.email);
   const getUserBooked = await bookingModel
     .find()
     .populate("slots")

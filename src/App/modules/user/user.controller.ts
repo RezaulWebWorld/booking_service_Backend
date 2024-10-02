@@ -7,7 +7,6 @@ import config from "../../config";
 
 const userRegistration = catchAsync(async (req, res, next) => {
   const user = req.body;
-  console.log(req.body);
   const result = await UserServices.createUserDb(user);
 
   sendResponse(res, {
@@ -20,7 +19,6 @@ const userRegistration = catchAsync(async (req, res, next) => {
 
 const userLogin = catchAsync(async (req, res, next) => {
   const { accessToken, refreshToken } = await UserServices.userLogin(req.body);
-  console.log(req.body);
   res.cookie("refreshToken", refreshToken, {
     httpOnly: true,
     secure: config.node_development === "production",

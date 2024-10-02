@@ -10,7 +10,6 @@ const createSlotService = async (payload: TSlot) => {
   try {
     const { room, date, startTime, endTime } = payload;
     const slotMeeting = await slotCreator(room, date, startTime, endTime);
-    console.log(slotMeeting, "slotMeeting");
     const result = await slotModel.create(slotMeeting);
     return result;
   } catch (error) {

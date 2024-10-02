@@ -12,7 +12,6 @@ const createUserDb = async (payload: TUser) => {
     throw new Error("Oops! User is already Exits");
   }
   const result = await User.create(payload);
-  console.log(result);
   return result;
 };
 

@@ -7,7 +7,6 @@ import { TSlot } from "./slot.interface";
 
 const createSlot = catchAsync(async (req, res, next) => {
   const slot = req.body;
-  console.log("Body", req.body);
   const result = await SlotService.createSlotService(slot);
   sendResponse(res, {
     statusCode: httpStatus.OK,

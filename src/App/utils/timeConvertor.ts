@@ -13,9 +13,7 @@ const minuteConverter = (time: string | undefined) => {
 
 const stringConverter = (convertedTime: number) => {
   const convertedMinute = convertedTime % 60;
-  console.log("convertedMinute", convertedMinute);
   const convertedHour = (convertedTime - convertedMinute) / 60;
-  console.log("convertedhour", convertedHour);
   return `${convertedHour.toString().padStart(2, "0")}: ${convertedMinute
     .toString()
     .padStart(2, "0")}`;
