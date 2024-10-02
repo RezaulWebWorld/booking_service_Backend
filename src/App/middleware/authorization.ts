@@ -7,6 +7,8 @@ import config from "../config";
 import { User } from "../modules/user/user.model";
 import { error } from "console";
 
+///// Middleware for Authorization with jwt tokent
+
 export const auth = (...requiredRoles: (keyof typeof USER_ROLE)[]) => {
   return catchAsync(async (req: Request, res: Response, next: NextFunction) => {
     const access_tokenBearer = req.headers.authorization;

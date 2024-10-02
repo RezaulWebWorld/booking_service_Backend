@@ -2,8 +2,8 @@ import { JwtPayload } from "jsonwebtoken";
 import { TRoom } from "./room.interface";
 import { Room } from "./room.model";
 import mongoose from "mongoose";
-import { setEngine } from "crypto";
 
+// Service for creating a room
 const createRoom = async (payload: TRoom) => {
   const roomName = await Room.findOne({ name: payload.name });
   const roomNumber = await Room.findOne({ roomNo: payload.roomNo });
@@ -16,6 +16,7 @@ const createRoom = async (payload: TRoom) => {
   const result = await Room.create(payload);
   return result;
 };
+// Service for get a single room service
 const getRoomService = async (_id: string) => {
   const roomid = await Room.findOne({ _id });
 
@@ -26,11 +27,13 @@ const getRoomService = async (_id: string) => {
   const result = await Room.findOne({ _id: roomid });
   return result;
 };
+// Service for get a single room service
 const getallRoomService = async () => {
   const allRoomInfo = await Room.find({ isDeleted: false });
 
   return allRoomInfo;
 };
+
 const updateRoomService = async (_id: string, payload: TRoom) => {
   const roomId = await Room.findOne({ _id });
 
