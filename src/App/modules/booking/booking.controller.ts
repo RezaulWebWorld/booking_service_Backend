@@ -6,7 +6,7 @@ import { bookingService } from "./booking.service";
 import { bookingModel } from "./booking.model";
 import config from "../../config";
 import { TUser } from "../user/user.interface";
-
+// Booking Controller for Create a Booking
 const createBookingController = catchAsync(async (req, res, next) => {
   try {
     const result = await bookingService.createBooking(req.body);
@@ -20,7 +20,7 @@ const createBookingController = catchAsync(async (req, res, next) => {
     throw new Error("You have Errors");
   }
 });
-
+// Booking Controller for get all Booking
 const getBookingController = catchAsync(async (req, res, next) => {
   try {
     const result = await bookingService.getBookingService();
@@ -34,6 +34,7 @@ const getBookingController = catchAsync(async (req, res, next) => {
     throw new Error("You have Errors");
   }
 });
+// Booking Controller for updating Booking with id
 const updatedBookingController = catchAsync(async (req, res, next) => {
   try {
     const { id } = req.params;
@@ -48,6 +49,7 @@ const updatedBookingController = catchAsync(async (req, res, next) => {
     throw new Error("You have Errors");
   }
 });
+// Booking Controller for deleting Booking with id
 const deleteBookingController = catchAsync(async (req, res, next) => {
   const { id } = req.params;
   const result = await bookingService.softDeleteBooking(id);
@@ -58,6 +60,7 @@ const deleteBookingController = catchAsync(async (req, res, next) => {
     data: result,
   });
 });
+// Booking Controller for get authentic user all Booking
 const getUserBookingController = catchAsync(async (req, res, next) => {
   const access_tokenBearer = req.headers.authorization;
   const access_token = access_tokenBearer?.split(" ")[1];
